@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Application.hpp"
 using namespace sf;
+using namespace std;
 
 class Fractal
 {
@@ -10,7 +11,7 @@ class Fractal
         VertexArray calcMandelbrot();
     private:
         int mandelbrotEscape(double real, double imaginary);
-        double screenToWorld();
+        pair<double, double> screenToWorld(int pixelCoordReal, int pixelCoordImg);
         void checkInput();
 
         VertexArray varray;
