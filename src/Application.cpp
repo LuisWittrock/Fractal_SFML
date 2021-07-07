@@ -38,11 +38,15 @@ void Application::checkKeys()
         }
         if (Keyboard::isKeyPressed(Keyboard::Up))
         {
+            int x = Mouse::getPosition(window).x;
+            int y = Mouse::getPosition(window).y;
             fractal.zoomIn();
             break;
         }
         if(Keyboard::isKeyPressed(Keyboard::Down))
         {
+            int x = Mouse::getPosition(window).x;
+            int y = Mouse::getPosition(window).y;
             fractal.zoomOut();
             break;
         }

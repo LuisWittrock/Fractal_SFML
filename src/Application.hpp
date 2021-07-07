@@ -9,6 +9,7 @@ class Application
     public:
         Application();
         void start();
+        RenderWindow window;
     private:
         void checkKeys();
         void draw();
@@ -17,7 +18,7 @@ class Application
         int bailout = 50;
         int WINDOW_WIDTH = 1280;
         int WINDOW_HEIGHT = 720;
-        RenderWindow window;
+        
         Event event;
         Fractal fractal;
 };
