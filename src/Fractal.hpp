@@ -10,7 +10,13 @@ class Fractal
     public:
         Fractal(int WINDOW_HEIGHT, int WINDOW_WIDTH, int bailout);
         VertexArray calcMandelbrot();
+        void zoomIn();
+        void zoomOut();
+        void normalize(); //normalizes the window and zoom
+        void move(int dir); //1-4 1 = up 2 = down 3 = right 4 = left
+        void changePrecision(int change);
     private:
+        double scale = 1;
         VertexArray varray;
         int WINDOW_HEIGHT, WINDOW_WIDTH;
         int bailout;

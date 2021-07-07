@@ -15,7 +15,7 @@ class Application
         void update();
 
         int bailout = 50;
-        int WINDOW_WIDTH = 1000;
+        int WINDOW_WIDTH = 1280;
         int WINDOW_HEIGHT = 720;
         RenderWindow window;
         Event event;

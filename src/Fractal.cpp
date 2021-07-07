@@ -1,4 +1,6 @@
 #include "Fractal.hpp"
+#include <iostream>
+
 
 Fractal::Fractal(int WINDOW_HEIGHT, int WINDOW_WIDTH, int bailout)
 {
@@ -9,8 +11,8 @@ Fractal::Fractal(int WINDOW_HEIGHT, int WINDOW_WIDTH, int bailout)
 
 std::pair<double, double> Fractal::screenToWorld(int pixelCoordReal, int pixelCoordImg) //translates pixel coordinate to a coordinate of a complex number (a*bi)
 {
-    double ImgCoord = (double)pixelCoordImg*((graphYMax-graphYMin)/(double)WINDOW_HEIGHT) + graphYMin;
-    double RealCoord = (double)pixelCoordReal*((graphXMax-graphXMin)/(double)WINDOW_WIDTH) + graphXMin;
+    double ImgCoord = (double)pixelCoordImg*((graphYMax-graphYMin)/(double)WINDOW_HEIGHT)*scale + graphYMin;
+    double RealCoord = (double)pixelCoordReal*((graphXMax-graphXMin)/(double)WINDOW_WIDTH)*scale + graphXMin;
     return make_pair(RealCoord, ImgCoord);
 }
 
@@ -62,4 +64,54 @@ int Fractal::mandelbrotEscape(pair<double, double> &RealImgPair)
     while((Zreal*Zreal + Zimg*Zimg) <= 4 && iteration < bailout);
 
     return iteration;
+}
+//everything that influences the view.
+void Fractal::move(int dir)
+{
+    switch (dir)
+    {
+    case 1: 
+        graphYMax -= 0.1*scale;
+        graphYMin -= 0.1*scale;
+        break;
+    case 2:
+        graphYMax += 0.1*scale;
+        graphYMin += 0.1*scale;
+        break;
+    case 3:
+        graphXMax += 0.1*scale;
+        graphXMin += 0.1*scale;
+        break;
+    case 4:
+        graphXMax -= 0.1*scale;
+        graphXMin -= 0.1*scale;
+        break;
+    
+    default:
+        break;
+    }
+}
+void Fractal::zoomIn()
+{
+    std::cout << "scale: " << scale << endl;
+    scale /= 1.1;
+}
+void Fractal::zoomOut()
+{
+    std::cout << "scale: " << scale << endl;
+    scale *= 1.1;
+}
+void Fractal::normalize()
+{
+    scale = 1;
+    graphXMax = 1;
+    graphXMin = -2;
+    graphYMax = 1;
+    graphYMin = -1;
+    bailout = 50;
+}
+void Fractal::changePrecision(int change)
+{
+    bailout += change;
+    cout << "precision = " << bailout << endl;
 }
